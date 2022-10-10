@@ -1,0 +1,21 @@
+Defina os seguintes conceitos centrais da abordagem ER:
+a) Entidade;
+Conjunto de objetos da realidade modelada sobre os quais deseja-se manter informações no banco de dados.
+
+b) Relacionamento;
+Conjunto de associações entre ocorrências de entidades.
+
+c) Atributo;
+Dado que é associado a cada ocorrência de uma entidade ou de um relacionamento.
+
+d) Domínio de um Atributo;
+Conjunto de valores que um atributo pode assumir.
+
+e) Generalização/especialização;
+Conceito onde uma entidade, denominada entidade genérica, possui ocorrências de tipos diferentes, denominada entidade especializada, e cada uma com suas características particulares. 
+
+f) Entidade Associativa;
+É um relacionamento que tem propriedades parecidas com a de uma entidade, onde é possível ligar tanto outros relacionamentos quanto entidades à essa entidade associativa.
+
+g) Cardinalidade de um Atributo.
+Número de ocorrênicias de entidade associadas a uma ocorrência da entidade em questão atravéz do relacionamento.
