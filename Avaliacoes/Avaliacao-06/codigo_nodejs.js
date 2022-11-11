@@ -10,7 +10,7 @@ db.run("DROP TABLE TB_ALUNO")
 db.run("DROP TABLE TB_PROFESSOR")
 db.run("DROP TABLE TB_DISCIPLINA")
 db.run("DROP TABLE TB_MATRICULA")
-// db.run("DROP TABLE TB_MATRICULA")
+db.run("DROP TABLE TB_PROFESSOR_DISCIPLINA")
 
 // Create a table
 db.run("CREATE TABLE IF NOT EXISTS TB_ALUNO (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, cpf TEXT NOT NULL)");
@@ -21,7 +21,7 @@ db.run("CREATE TABLE IF NOT EXISTS TB_DISCIPLINA (id INTEGER, nome TEXT, PRIMARY
 
 db.run("CREATE TABLE IF NOT EXISTS TB_MATRICULA (id INTEGER,  aluno_id INTEGER, professor_id INTEGER, disciplina_id INTEGER, PRIMARY KEY ('id' AUTOINCREMENT), FOREIGN KEY ('aluno_id') references 'TB_ALUNO'('id'), FOREIGN KEY ('professor_id') references 'TB_PROFESSOR'('id'), FOREIGN KEY ('disciplina_id') references 'TB_DISCIPLINA'('id'))");
 
-// db.run("CREATE TABLE IF NOT EXISTS TB_PROFESSOR_DISCIPLINA (id INTEGER PRIMARY KEY, disciplina_id INTEGER NOT NULL, professor_id INTEGER NOT NULL, FOREIGN KEY ('disciplina_id') references 'TB_DISCIPLINA'('id'),FOREIGN KEY ('professor_id') references 'TB_PROFESSOR'('id'))");
+db.run("CREATE TABLE IF NOT EXISTS TB_PROFESSOR_DISCIPLINA (id INTEGER PRIMARY KEY, disciplina_id INTEGER NOT NULL, professor_id INTEGER NOT NULL, FOREIGN KEY ('disciplina_id') references 'TB_DISCIPLINA'('id'),FOREIGN KEY ('professor_id') references 'TB_PROFESSOR'('id'))");
  
 // Insert data into the table
 db.run("INSERT INTO TB_ALUNO (nome, cpf) VALUES ('Maria Yohana', '123.456.789-09')");
@@ -46,9 +46,9 @@ db.run("INSERT INTO TB_MATRICULA (aluno_id, professor_id, disciplina_id) VALUES 
 db.run("INSERT INTO TB_MATRICULA (aluno_id, professor_id, disciplina_id) VALUES (3, 2, 2)");
 db.run("INSERT INTO TB_MATRICULA (aluno_id, professor_id, disciplina_id) VALUES (3, 3, 3)");
 
-// db.run("INSERT INTO TB_PROFESSOR_DISCIPLINA (disciplina_id, professor_id) VALUES (1, 1)");
-// db.run("INSERT INTO TB_PROFESSOR_DISCIPLINA (disciplina_id, professor_id) VALUES (2, 2)");
-// db.run("INSERT INTO TB_PROFESSOR_DISCIPLINA (disciplina_id, professor_id) VALUES (3, 3)");
+db.run("INSERT INTO TB_PROFESSOR_DISCIPLINA (disciplina_id, professor_id) VALUES (1, 1)");
+db.run("INSERT INTO TB_PROFESSOR_DISCIPLINA (disciplina_id, professor_id) VALUES (2, 2)");
+db.run("INSERT INTO TB_PROFESSOR_DISCIPLINA (disciplina_id, professor_id) VALUES (3, 3)");
 
 // Query data from the table
  console.log("TABELA ALUNO \n")
@@ -66,15 +66,18 @@ db.each("SELECT id, nome FROM TB_DISCIPLINA", function(err, row) {
     console.log(row.id + ": " + row.nome);
   });
 
+console.log("TABELA PROFESSOR-DISCIPLINA")
+db.each("SELECT id, disciplina_id, professor_id  FROM TB_PROFESSOR_DISCIPLINA", function(err, row) {
+    console.log(row.id + ": " + row.disciplina_id + ", " + row.professor_id);
+  });
+  
 console.log("TABELA MATRICULA \n")
 db.each("SELECT id, aluno_id, professor_id, disciplina_id FROM TB_MATRICULA", function(err, row) {
     console.log(row.id + ": " + row.aluno_id + ", " + row.professor_id + ", " + row.disciplina_id);
   });
 
-// console.log("TABELA PROFESSOR-DISCIPLINA")
-// db.each("SELECT id, disciplina_id, professor_id  FROM TB_DISCIPLINA", function(err, row) {
-//     console.log(row.id + ": " + row.discipliona_id, ", ", row.professor_id);
-//   });
+
+//tentei imprimir no console as tabelas de outro jeito mas não consegui  
 
 // console.log("TABELA MATRÍCULA \n")
 // db.each("SELECT TB_MATRICULA.id, TB_ALUNO.nome, TB_PROFESSOR.nome, TB_DISCIPLINA.nome FROM (((TB_MATRICULA INNER JOIN TB_ALUNO ON TB_MATRICULA.aluno_id = TB_ALUNO.id) INNER JOIN TB_PROFESSOR ON TB_MATRICULA.professor_id = TB_PROFESSOR.id) INNER JOIN TB_DISCIPLINA ON TB_MATRICULA.disciplina_id = TB_DISCIPLINA.id)", function(err, row) {
